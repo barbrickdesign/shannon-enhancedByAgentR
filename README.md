@@ -20,6 +20,8 @@ It analyzes your source code, identifies attack vectors, and executes real explo
 ---
 </div>
 
+> **New to Shannon?** → [**5-minute Quick Start guide**](QUICKSTART.md)
+
 ## What is Shannon?
 
 Shannon is an AI pentester developed by [Keygraph](https://keygraph.io). It performs white-box security testing of web applications and their underlying APIs by combining source code analysis with live exploitation.

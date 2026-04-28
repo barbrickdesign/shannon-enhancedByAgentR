@@ -4,13 +4,32 @@
 // it under the terms of the GNU Affero General Public License version 3
 // as published by the Free Software Foundation.
 
+/**
+ * Agent registry — single source of truth for every agent in the pentest pipeline.
+ *
+ * HOW THE PIPELINE WORKS (plain English):
+ *
+ *   pre-recon  →  recon  →  [5 parallel vuln/exploit pairs]  →  report
+ *
+ * Each agent has:
+ *   - A prompt template (file in apps/worker/prompts/)
+ *   - A deliverable filename (the Markdown file it must write to succeed)
+ *   - A list of prerequisites (agents that must finish first)
+ *
+ * HOW TO ADD A NEW AGENT:
+ *   1. Add an entry to AGENTS below.
+ *   2. Create a matching prompt file in apps/worker/prompts/<promptTemplate>.txt
+ *   3. Add a thin activity wrapper in apps/worker/src/temporal/activities.ts
+ *   4. Wire it into the workflow in apps/worker/src/temporal/workflows.ts
+ */
+
 import { fs, path } from 'zx';
 
 import { validateQueueAndDeliverable } from './services/queue-validation.js';
 import type { ActivityLogger } from './types/activity-logger.js';
 import type { AgentDefinition, AgentName, AgentValidator, PlaywrightSession, VulnType } from './types/index.js';
 
-// Agent definitions according to PRD
+// Agent definitions — each entry drives prompt loading, deliverable validation, and resume logic.
 export const AGENTS: Readonly<Record<AgentName, AgentDefinition>> = Object.freeze({
   'pre-recon': {
     name: 'pre-recon',

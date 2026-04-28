@@ -35,6 +35,8 @@ export async function start(args: StartArgs): Promise<void> {
   const creds = validateCredentials();
   if (!creds.valid) {
     console.error(`ERROR: ${creds.error}`);
+    const prefix = isLocal() ? './shannon' : 'npx @keygraph/shannon';
+    console.error(`\nRun '${prefix} check' to diagnose setup issues.`);
     process.exit(1);
   }
 
