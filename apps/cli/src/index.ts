@@ -13,6 +13,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { build } from './commands/build.js';
+import { check } from './commands/check.js';
 import { logs } from './commands/logs.js';
 import { setup } from './commands/setup.js';
 import { start } from './commands/start.js';
@@ -61,12 +62,15 @@ function showHelp(): void {
   console.log(`
 Shannon - AI Penetration Testing Framework
 
+New here? Run:  ${prefix} check
+
 Usage:${
     mode === 'local'
       ? ''
       : `
   ${prefix} setup                                       Configure credentials`
   }
+  ${prefix} check                                        Validate prerequisites (Docker, credentials, etc.)
   ${prefix} start --url <url> --repo <path> [options]   Start a pentest scan
   ${prefix} stop [--clean]                               Stop all containers
   ${prefix} workspaces                                   List all workspaces
@@ -103,6 +107,8 @@ State directory: ./workspaces/`
 State directory: ~/.shannon/`
 }
 Monitor workflows at http://localhost:8233
+
+Quick start guide: QUICKSTART.md
 `);
 }
 
@@ -210,6 +216,9 @@ switch (command) {
   }
   case 'stop':
     stop(args.includes('--clean'));
+    break;
+  case 'check':
+    check();
     break;
   case 'logs': {
     const workspaceId = args[1];
