@@ -100,13 +100,13 @@ See [`configs/example-config.yaml`](apps/worker/configs/example-config.yaml) for
 
 Shannon runs five phases automatically:
 
-```
-Phase 1 — Pre-Recon    Scans the target and reads your source code
-Phase 2 — Recon        Maps all entry points, APIs, and auth flows
-Phase 3 — Vuln Scan    5 agents run in parallel (Injection, XSS, Auth, Authz, SSRF)
-Phase 4 — Exploit      Proves each finding with a real, working exploit
-Phase 5 — Report       Writes a pentest-grade report with copy-paste PoCs
-```
+| Phase | What it does |
+|---|---|
+| 1 — Pre-Recon   | Scans the target and reads your source code |
+| 2 — Recon       | Maps all entry points, APIs, and auth flows |
+| 3 — Vuln Scan   | 5 agents run in parallel (Injection, XSS, Auth, Authz, SSRF) |
+| 4 — Exploit     | Proves each finding with a real, working exploit |
+| 5 — Report      | Writes a pentest-grade report with copy-paste PoCs |
 
 A full scan takes roughly 1–1.5 hours and costs approximately $50 using Claude Sonnet.
 

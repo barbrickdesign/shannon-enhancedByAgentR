@@ -145,7 +145,7 @@ function checkWorkerImageBuilt(): CheckResult {
 }
 
 function checkNpxImageReachable(): CheckResult {
-  // Just verify docker is able to reach Docker Hub by checking if image exists or can be pulled.
+  // Just verify Docker is able to reach Docker Hub by checking if image exists or can be pulled.
   // We don't actually pull here — that would be slow. We just inform the user.
   const ok = run('docker', ['image', 'inspect', 'keygraph/shannon:latest']);
   if (ok) {
@@ -200,7 +200,7 @@ export function check(): void {
 
   console.log('');
   console.log('Shannon pre-flight check');
-  console.log('────────────────────────');
+  console.log('------------------------');
   console.log('');
 
   const results: CheckResult[] = [];
